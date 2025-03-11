@@ -30,6 +30,11 @@ export function UrlForm() {
   const [shortUrl, setShortUrl] = useState<string | null>(null);
   const [isNew, setIsNew] = useState<boolean>(false);
   
+  const toastStyles = {
+    success: { style: { backgroundColor: 'green', color: 'white' } },
+    error: { style: { backgroundColor: 'red', color: 'white' } },
+  };
+
   const createUrl = trpc.url.create.useMutation({
     onSuccess: (data) => {
       const baseUrl = window.location.origin;
@@ -37,13 +42,13 @@ export function UrlForm() {
       setIsNew(data.isNew);
       
       if (data.isNew) {
-        toast.success("URL shortened successfully!");
+        toast.success("URL shortened successfully!", toastStyles.success);
       } else {
         toast.info("This URL already exists in our system.");
       }
     },
     onError: (error) => {
-      toast.error(error.message || "Failed to shorten URL");
+      toast.error(error.message || "Failed to shorten URL", toastStyles.error);
     },
   });
   
@@ -61,7 +66,7 @@ export function UrlForm() {
   function copyToClipboard() {
     if (shortUrl) {
       navigator.clipboard.writeText(shortUrl);
-      toast.success("Copied to clipboard!");
+      toast.success("Copied to clipboard!", toastStyles.success);
     }
   }
   

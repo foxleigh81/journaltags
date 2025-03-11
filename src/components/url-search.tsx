@@ -26,6 +26,11 @@ const searchFormSchema = z.object({
 
 type SearchFormValues = z.infer<typeof searchFormSchema>;
 
+const toastStyles = {
+  success: { style: { backgroundColor: 'green', color: 'white' } },
+  error: { style: { backgroundColor: 'red', color: 'white' } },
+};
+
 export function UrlSearch() {
   const router = useRouter();
   
@@ -42,7 +47,7 @@ export function UrlSearch() {
       router.push(`/${data.code}`);
     } else {
       // Otherwise, search for URLs containing the query
-      toast.info("Please enter a valid 5-character code");
+      toast.info("Please enter a valid 5-character code", toastStyles.error);
     }
   }
   
