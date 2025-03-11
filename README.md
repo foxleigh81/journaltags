@@ -33,7 +33,7 @@ JournalTags is a simple URL shortening application built with modern web technol
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/journaltags.git
+   git clone https://github.com/foxleigh81/journaltags.git
    cd journaltags
    ```
 
